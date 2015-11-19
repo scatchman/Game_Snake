@@ -34,7 +34,7 @@ public class game {
         		}
         		terminal.clearScreen();
         		terminal.moveCursor(x,y);
-        		terminal.putCharacter('@'); 
+        		terminal.putCharacter('@');
         	}
 		}
     }
