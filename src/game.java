@@ -14,27 +14,47 @@ public class game {
         terminal.setCursorVisible(false);
         terminal.moveCursor(x,y);
 		terminal.putCharacter('@');
+		int direction = 4; //1 - up. 2 - left. 3 - down. 4 - right.
         while(true) {
         	Key key = terminal.readInput();
         	if (key != null) {
         		if (key.getKind() == Key.Kind.ArrowUp) {
-        			y = y - 1;
+        			if (direction != 3)
+        			direction = 1;
         		}
         		if (key.getKind() == Key.Kind.ArrowDown) {
-        			y = y + 1;
+        			if (direction != 1)
+        			direction = 3;
         		}
         		if (key.getKind() == Key.Kind.ArrowLeft) {
-        			x = x - 1;
+        			if (direction != 4)
+        			direction = 2;
         		}
         		if (key.getKind() == Key.Kind.ArrowRight) {
-        			x = x + 1;
+        			if (direction != 2)
+        			direction = 4;
         		}
         		if (key.getKind() == Key.Kind.Escape) {
         			System.exit(0);
         		}
-        		terminal.clearScreen();
-        		terminal.moveCursor(x,y);
-        		terminal.putCharacter('@');
+        		
+        	}
+        	
+        	terminal.clearScreen();
+    		if (direction == 1)
+    			y = y - 1;
+    		if (direction == 3)
+    			y = y + 1;
+    		if (direction == 2)
+    			x = x - 1;
+    		if (direction == 4)
+    			x = x + 1;
+    		terminal.moveCursor(x,y);
+    		terminal.putCharacter('@');
+    		try {
+        	    Thread.sleep(500);                 //0,5 sec
+        	} catch(InterruptedException ex) {
+        	    Thread.currentThread().interrupt();
         	}
 		}
     }
